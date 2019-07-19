@@ -1,0 +1,109 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Bootstrap css link-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<!-- Menu code-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for("home")}}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("add_assert")}}">Add Assert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("view_assert")}}">View Asert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Edit Asert</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- H1 code-->
+<div class="container">
+  <h2 align="center"><u>EDIT ASSERT</u></h2>
+</div><br>
+  <div class="container">
+    <br>
+    <div class="container text-center">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <span class="alert  alert-{{ category }}">{{ message }}</span>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    </div>
+    <div class="container">
+      <form class="form-group" action="" method='post'>
+        <br>
+        <table align="center">
+
+          <tr>
+
+            <td> <label for="name">Assert Name:</label> </td>
+            <td> <input type="text" name="assert_name" value="{{data[0]}}" placeholder="Assert Name" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Assert code:</label> </td>
+            <td> <input type="text" name="code" value="{{data[1]}}" placeholder="Assert code" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Assert Type:</label> </td>
+            <td> <input type="text" name="assert_type" value="{{data[2]}}" placeholder="Assert type" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Department:</label> </td>
+            <td> <input type="text" name="department" value="{{data[3]}}" placeholder="Department" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Amount of assert:</label> </td>
+            <td> <input type="text" name="price_of_assert" value="{{data[4]}}" placeholder="Amount Of Assert" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Purchase Date<br>("YYYY-MM-DD"):</label> </td>
+            <td> <input type="date" name="purchase_date" value="{{data[5]}}" placeholder="Purchse Date" class="form-control" required> </td>
+          </tr>
+
+          <tr>
+            <td> <label for="name">Vendor:</label> </td>
+            <td> <input type="text" name="vendor" value="{{data[6]}}" placeholder="Vendor" class="form-control" required> </td>
+          </tr>
+          <tr>
+            <td> <label for="name">Contact:</label> </td>
+            <td> <input type="text" name="contact" value="{{data[7]}}" placeholder="Person Contaact Number" class="form-control" required> </td>
+          </tr>
+
+          <tr>
+            <td colspan="2" align="right"> <input type="submit" name="" value="Update Assert" class="btn-primary"> </td>
+          </tr>
+          {% if error %}
+            <p class="alert alert-danger text-center"><strong>Error:</strong> {{ error }}
+          {% endif %}
+        </table>
+      </form>
+
+    </div>
+
+  </div>
+
+
+<!-- Boostrap javascript link-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}

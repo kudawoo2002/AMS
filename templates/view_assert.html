@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Bootstrap css link-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<!-- Menu code-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if session.logged_in %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for("home")}}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("add_assert")}}">Add Assert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("view_assert")}}">View Asert</a>
+      </li>
+    </ul>
+  </div>
+  <span class="navbar-text"><a href="/logout/">Logout</a></span>
+  {% endif %}
+</nav>
+
+<!-- H1 code-->
+<div class="container">
+  <h2 align="center"><u>ASSERT REPORT</u></h2>
+</div><br>
+
+<!-- Search form code-->
+<div class="conta">
+
+</div>
+
+<div class="container text-center">
+  <h3>Search assert base on assert type<br/>(CAR, COMPUTER or FURNITURE ...)</h3>
+  <form class="form-group" action="" method="post">
+    <label for="search"><b>Search</b>:</label>
+    <input type="text" name="search" value="" placeholder="Search" class="form-control"><br>
+    <input type="submit" name="" value="Search" class="btn btn-primary">
+
+  </form>
+
+</div><br>
+<div class="container" align="center">
+  {% include btn ignore missing %}
+</div><br>
+
+<!--Table code to host the view from db-->
+  <div class="container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+          <th scope="col">Assert_ID</th>
+          <th scope="col">Assert Name</th>
+          <th scope="col">Assert code</th>
+          <th scope="col">Assert Type</th>
+          <th scope="col">Department</th>
+          <th scope="col">Price of Assert</th>
+          <th scope="col">Purchse Date</th>
+          <th scope="col">Vendor</th>
+          <th scope="col">Contact Person</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data_table %}
+          <tr>
+            <td scope="row"><a href="/edit_assert/{{row[0]}}">{{row[0]}}</a></td>
+            <td>{{row[1]}}</td>
+            <td>{{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[5]}}</td>
+            <td>{{row[6]}}</td>
+            <td>{{row[7]}}</td>
+            <td>{{row[8]}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+      </table>
+
+  </div>
+</div>
+
+<!-- Pagination code-->
+
+<!-- Boostrap javascript link-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}

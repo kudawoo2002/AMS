@@ -1,0 +1,147 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Bootstrap css link-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<!-- Menu code-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if session.logged_in %}
+      <li class="nav-item active">
+        <a class="nav-link" href="{{url_for("home")}}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("add_assert")}}">Add Assert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("view_assert")}}">View Asert</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for("upload")}}">Upload</a>
+      </li>
+    </ul>
+  </div>
+  <span class="navbar-text">Welcom <strong>{{session['username']}}</strong></span> &nbsp;
+    <span class="navbar-text"><a href="/logout/">Logout</a></span>
+
+  {% endif %}
+</nav>
+
+<!-- H1 code-->
+<div class="container">
+  <h2 align="center"><u>WELCOME TO ASSERT MANAGMENT SYSTEM</u></h2>
+</div>
+
+<div class="container text-center">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    <span class="alert  alert-{{ category }}">{{ message }}</span>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
+</div>
+
+<!-- dashboard code-->
+
+<div class="container">
+  <h1 class="text-center" ><u>Dashboard</u></h1>
+</div><br>
+
+<div class="container" align="center">
+  <div class="card-deck">
+    <!--1st card-->
+    <div class="card border-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Computers</div>
+    <div class="card-body">
+      <p class="card-text">
+        {% if comp > 1 %}
+          The system got <strong>{{comp}}</strong> computers in the database.
+        {% else %}
+          The system got <strong>{{comp}}</strong> computer in the database.
+        {% endif %}
+        </p>
+    </div>
+  </div>
+
+  <!--2nd card-->
+  <div class="card border-primary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Cars</div>
+  <div class="card-body">
+    <p class="card-text">
+      {% if car > 1 %}
+        The system got <strong>{{car}}</strong> cars in the database.
+      {% else %}
+        The system got <strong>{{car}}</strong> car in the database.
+      {% endif %}
+    </p>
+  </div>
+  </div>
+
+   <!--3rd card-->
+   <div class="card border-primary mb-3" style="max-width: 18rem;">
+   <div class="card-header">Furnitures</div>
+   <div class="card-body">
+     <p class="card-text">
+       {% if fur > 1 %}
+         The system got <strong>{{fur}}</strong> furnitures in the database.
+       {% else %}
+         The system got <strong>{{fur}}</strong> furniture in the database.
+       {% endif %}
+     </p>
+   </div>
+   </div>
+  </div>
+</div><br>
+
+<!--table code-->
+<div class="container">
+  <h3 align="center">Lastest Add items</h3><br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      <th scope="col">Assert  ID</th>
+      <th scope="col">Assert Name</th>
+      <th scope="col">Assert code</th>
+      <th scope="col">Assert Type</th>
+      <th scope="col">Department</th>
+      <th scope="col">Price of Assert</th>
+      <th scope="col">Purchse Date</th>
+      <th scope="col">Vendor</th>
+      <th scope="col">Contact Person</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in data %}
+      <tr>
+        <td scope="row">{{row[0]}}</td>
+        <td>{{row[1]}}</td>
+        <td>{{row[2]}}</td>
+        <td>{{row[3]}}</td>
+        <td>{{row[4]}}</td>
+        <td>{{row[5]}}</td>
+        <td>{{row[6]}}</td>
+        <td>{{row[7]}}</td>
+        <td>{{row[8]}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+
+</div>
+<!-- Boostrap javascript link-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{% endblock %}
